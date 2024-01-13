@@ -9,10 +9,13 @@ def test_calculate_total_price():
 
     ex2 = Item('луковичок', 20.0, 1)
     Item.pay_rate = 0.8
+    ex2.apply_discount()
     assert ex2.calculate_total_price() == 16.0
 
+    ex3 = Item("Смартфон", 10000, 20)
+    ex4 = Item("Ноутбук", 20000, 5)
+    Item.pay_rate = 0.8
+    ex3.apply_discount()
+    assert ex3.price == 8_000.0
+    assert ex4.price == 20_000.0
 
-def test_apply_discount():
-    ex1 = Item('морковка', 10.0, 10)
-    Item.pay_rate = 0.9
-    assert ex1.apply_discount() == 9.0
