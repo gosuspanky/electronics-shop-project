@@ -1,5 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
+from config import DICT_DIR
 from src.item import Item
 
 
@@ -19,3 +19,15 @@ def test_calculate_total_price():
     assert ex3.price == 8_000.0
     assert ex4.price == 20_000.0
 
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv(DICT_DIR)
+    assert len(Item.all) == 5
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
