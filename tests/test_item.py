@@ -23,8 +23,15 @@ def test_calculate_total_price():
 def test_instantiate_from_csv():
     Item.instantiate_from_csv(DICT_DIR)
     assert len(Item.all) == 5
+
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
+
+    item1.name = 'Телефон'
+    assert item1.name == 'Телефон'
+
+    item1.name = 'СуперСмартфон'
+    assert item1.name == 'СуперСмарт'
 
 
 def test_string_to_number():
