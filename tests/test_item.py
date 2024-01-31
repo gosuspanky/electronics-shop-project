@@ -67,6 +67,11 @@ def test_add():
     assert phone1 + phone1 == 10
 
 
+def test_number_of_sim():
+    phone1.number_of_sim = 5
+    assert phone1.number_of_sim == 5
+
+
 def test_exc_number_of_sim():
-    assert ("ValueError: Количество физических SIM-карт должно быть целым числом больше нуля." ==
-            "ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.")
+    phone1.number_of_sim = 0
+    assert phone1.number_of_sim() == 0
