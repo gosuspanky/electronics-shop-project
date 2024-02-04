@@ -6,8 +6,10 @@ item1 = Item("Смартфон", 10000, 20)
     phone1.number_of_sim = 0
     # ValueError: Количество физических SIM-карт должно быть целым числом больше нуля
 """
+import pytest
 from config import DICT_DIR
 from src.item import Item
+from src.local_errors import InstantiateCSVError
 from src.phone import Phone
 
 
@@ -75,3 +77,17 @@ def test_number_of_sim():
 def test_exc_number_of_sim():
     phone1.number_of_sim = 0
     assert phone1.number_of_sim() == 0
+
+
+def test_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv("item.csv")
+
+
+def test_instantiate_csv_error():
+    """
+    Тест будет работать только в том случае, если добавить файл
+    в котором будут не соответствовать данные для метода
+    """
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv("item.csv")
