@@ -1,4 +1,6 @@
 import csv
+import os.path
+
 from local_errors import InstantiateCSVError
 
 
@@ -59,14 +61,12 @@ class Item:
     def instantiate_from_csv(cls, csvfile):
         cls.all.clear()
 
+        if not os.path.exists(csvfile):
+            raise FileNotFoundError("Файл не найден")
+
         try:
             with open(csvfile, encoding="windows-1251") as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=',')
-
-        except FileNotFoundError:
-            raise FileNotFoundError("Отсутствует файл items.csv")
-
-        try:
             for data in reader:
 
                 name = str(data['name'])
