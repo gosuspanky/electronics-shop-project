@@ -60,20 +60,23 @@ class Item:
         cls.all.clear()
 
         try:
-            with open(csvfile, newline='', encoding="windows-1251") as csvfile:
-                reader = csv.DictReader(csvfile)
-                for data in reader:
-                    if not data['name']:
-                        raise InstantiateCSVError
-                    elif not data['price']:
-                        raise InstantiateCSVError
-                    elif not data['quantity']:
-                        raise InstantiateCSVError
-                    else:
-                        cls(data['name'], float(data['price']), int(data['quantity']))
+            with open(csvfile, encoding="windows-1251") as csvfile:
+                reader = csv.DictReader(csvfile, delimiter=',')
 
         except FileNotFoundError:
-            raise FileNotFoundError('Отсутствует файл item.csv')
+            raise FileNotFoundError("Отсутствует файл items.csv")
+
+        try:
+            for data in reader:
+
+                name = str(data['name'])
+                price = float(data['price'])
+                quantity = int(data['quantity'])
+
+                cls(name, price, quantity)
+
+        except InstantiateCSVError as ex:
+            print(ex.message)
 
     @staticmethod
     def string_to_number(some_num):
