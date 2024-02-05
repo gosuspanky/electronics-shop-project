@@ -1,6 +1,6 @@
 class InstantiateCSVError(Exception):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.message = "Файл item.csv поврежден"
 
     def __str__(self):

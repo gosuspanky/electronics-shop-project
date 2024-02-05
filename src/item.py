@@ -1,7 +1,7 @@
 import csv
 import os.path
 
-from local_errors import InstantiateCSVError
+from src.local_errors import InstantiateCSVError
 
 
 class Item:
@@ -75,8 +75,8 @@ class Item:
 
                 cls(name, price, quantity)
 
-        except InstantiateCSVError as ex:
-            print(ex.message)
+        except ValueError:
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(some_num):
