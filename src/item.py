@@ -73,7 +73,7 @@ class Item:
                         cls(data['name'], float(data['price']), int(data['quantity']))
 
         except FileNotFoundError:
-            print("Отсутствует файл item.csv")
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
     @staticmethod
     def string_to_number(some_num):
